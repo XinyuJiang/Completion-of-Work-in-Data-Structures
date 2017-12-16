@@ -1,0 +1,31 @@
+Compose
+Class： Blocks, Rectangle, Solver, Helper
+Blocks is the data structure that be used to as tray. It has some instance variables, like  length, width ,weight(used in UCS algorithm), a matrix store the info that where the point has been taken up, and two hashset store the rectangle. Rectangle is the small 
+
+Rectangle is the small part in Blocks(each block), has some instance variables like rx,ry(coordinate), rlength and rwidth.
+
+Solve is the main class in this procedure. First it use helper to creat a new blocks(every block is equivalent to a state).Second, try to move every rectangle in this block, and store new blocks in a priortyqueue. Priorityqueue sort by weight, weight is blocks' instance variable which related to current rectangle's position with goalrectangle's position. 
+
+Helper is a class that been used to receive the inputfile.
+
+Passed ten puzzles in hard level in 2 mins:
+
+big.tray.1   big.tray.1.goal
+big.tray.3   big.tray.3.goal
+c54		  	53.54.64.goal
+c55			 55.56.goal
+c43-45		 55.56.goal
+c25			 15.23-27.30.41.goal
+c26          15.23-27.30.41.goal
+big.tray.4   many.blocks.20.goal
+big.tray.4   many.blocks.20+180.goal
+big.tray.4   many.blocks.100.goal
+
+About the search algorithm:
+Choosing algorithm from normal search algorithm like BFS,DFS,UCS,A*. DFS doesn't suitable for this problem because it's hard to move rectangle continuous. BFS is good but not enough because when you treat the hard puzzle there are so many states that it will spend so much time to find a possibe path. UCS(UniformCostSearch) is better but the key point is to choose a effient weight to sort the priorityqueue. Here I try to use the manhataan distance between current and goal rectangle's position as weight. A* may works better but it's hard to find heuristic cost. UCS is enough.
+
+Debugging option: o1 print goal graph 
+				  o2 print actions that update the state
+
+Note: For the big.tray.4 series puzzles it's hard to use BFS,DFS or UCS in normal way. So I changed the initrectangle and goalrectangle and exchanged the empty and rectangle when only one empty on the graph and every rectangle's lenth and width are both 1. Then it works well.
+
